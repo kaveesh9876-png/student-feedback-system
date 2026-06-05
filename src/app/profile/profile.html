@@ -1,0 +1,32 @@
+<canvas id="pr-stars"></canvas>
+<div class="pr-halo pr-h1"></div>
+<div class="pr-halo pr-h2"></div>
+<div class="pr-grid"></div>
+
+<div class="pr-navbar">
+    <div class="pr-brand">🎓 Student Portal</div>
+    <a class="pr-nav-link" routerLink="/feedback">⬅ Back to Feedback</a>
+</div>
+
+<div class="pr-main">
+    <div class="pr-card">
+        <div class="pr-corner pr-c-tl"></div>
+        <div class="pr-corner pr-c-tr"></div>
+        <div class="pr-corner pr-c-bl"></div>
+        <div class="pr-corner pr-c-br"></div>
+
+        <div class="pr-avatar">{{ user.name.charAt(0).toUpperCase() }}</div>
+        <h3 class="pr-title">Student Profile</h3>
+
+        <div class="pr-field">
+            <label class="pr-label">Full Name</label>
+            <input type="text" class="pr-input" [value]="user.name" readonly />
+        </div>
+        <div class="pr-field">
+            <label class="pr-label">Email</label>
+            <input type="email" class="pr-input" [value]="user.email" readonly />
+        </div>
+
+        <a routerLink="/feedback" class="pr-btn">⬅ Back to Feedback</a>
+    </div>
+</div>

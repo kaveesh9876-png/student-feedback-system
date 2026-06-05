@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+:host {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #020817;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+#pr-stars {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.pr-halo {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+.pr-h1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 70%);
+    top: 25%;
+    left: 20%;
+    animation: prHalo 10s ease-in-out infinite;
+}
+
+.pr-h2 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.12), transparent 70%);
+    top: 70%;
+    left: 75%;
+    animation: prHalo 13s ease-in-out infinite reverse;
+}
+
+@keyframes prHalo {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+.pr-grid {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image: linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: prGrid 20s linear infinite;
+}
+
+@keyframes prGrid {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 60px 60px;
+    }
+}
+
+.pr-navbar {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 28px;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(12px);
+}
+
+.pr-brand {
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.pr-nav-link {
+    font-size: 13px;
+    color: #64748b;
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    transition: all 0.2s;
+
+    &:hover {
+        color: #e2e8f0;
+        background: rgba(255, 255, 255, 0.06);
+    }
+}
+
+.pr-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    position: relative;
+    z-index: 10;
+}
+
+.pr-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    animation: prCardIn 0.7s cubic-bezier(.34, 1.56, .64, 1) both;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 200%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #3b82f6, #8b5cf6, transparent);
+        animation: prScan 4s linear infinite;
+    }
+}
+
+@keyframes prCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes prScan {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.pr-corner {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-color: #3b82f6;
+    border-style: solid;
+    opacity: 0.5;
+}
+
+.pr-c-tl {
+    top: 10px;
+    left: 10px;
+    border-width: 2px 0 0 2px;
+    border-radius: 3px 0 0 0;
+}
+
+.pr-c-tr {
+    top: 10px;
+    right: 10px;
+    border-width: 2px 2px 0 0;
+    border-radius: 0 3px 0 0;
+}
+
+.pr-c-bl {
+    bottom: 10px;
+    left: 10px;
+    border-width: 0 0 2px 2px;
+    border-radius: 0 0 0 3px;
+}
+
+.pr-c-br {
+    bottom: 10px;
+    right: 10px;
+    border-width: 0 2px 2px 0;
+    border-radius: 0 0 3px 0;
+}
+
+.pr-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 auto 1.2rem;
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+    position: relative;
+    z-index: 1;
+}
+
+.pr-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.pr-field {
+    margin-bottom: 1rem;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+}
+
+.pr-label {
+    display: block;
+    font-size: 11px;
+    color: #3b82f6;
+    margin-bottom: 5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.pr-input {
+    width: 100%;
+    padding: 11px 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #94a3b8;
+    font-size: 14px;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+    cursor: default;
+}
+
+.pr-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Orbitron', monospace;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+    position: relative;
+    z-index: 1;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.25s;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+    }
+}

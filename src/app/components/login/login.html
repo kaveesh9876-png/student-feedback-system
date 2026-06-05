@@ -1,0 +1,107 @@
+<canvas id="lfs-stars"></canvas>
+<div class="lfs-halo lfs-h1"></div>
+<div class="lfs-halo lfs-h2"></div>
+<div class="lfs-halo lfs-h3"></div>
+<div class="lfs-grid-lines"></div>
+<div class="lfs-particles" id="lfs-ptcls"></div>
+
+<div class="lfs-header">
+    <div class="lfs-logo-3d">🎓</div>
+    <div class="lfs-sys-title">Student Feedback System</div>
+    <div class="lfs-sys-sub">Next-Gen Academic Intelligence Platform</div>
+    <div class="lfs-stats-bar">
+        <div class="lfs-stat">
+            <span class="lfs-stat-num">1240+</span>
+            <span class="lfs-stat-lbl">Students</span>
+        </div>
+        <div class="lfs-divline"></div>
+        <div class="lfs-stat">
+            <span class="lfs-stat-num">48</span>
+            <span class="lfs-stat-lbl">Courses</span>
+        </div>
+        <div class="lfs-divline"></div>
+        <div class="lfs-stat">
+            <span class="lfs-stat-num">3860+</span>
+            <span class="lfs-stat-lbl">Feedbacks</span>
+        </div>
+    </div>
+</div>
+
+<div class="lfs-main-area">
+
+    <div *ngIf="!loginType" class="lfs-card-wrap">
+        <div class="lfs-card-3d">
+            <div class="lfs-corner lfs-c-tl"></div>
+            <div class="lfs-corner lfs-c-tr"></div>
+            <div class="lfs-corner lfs-c-bl"></div>
+            <div class="lfs-corner lfs-c-br"></div>
+            <div class="lfs-card-label">— Access Portal —</div>
+
+            <button class="lfs-lbtn lfs-lbtn-s" (click)="loginType = 'Student'">
+                <div class="lfs-bicon">🎒</div>
+                <div class="lfs-btxt">
+                    <span class="lfs-bt">Student Login</span>
+                    <span class="lfs-bd">Submit your course feedback</span>
+                </div>
+                <span class="lfs-barr">→</span>
+            </button>
+
+            <div class="lfs-dvd">
+                <div class="lfs-dvl"></div>
+                <span class="lfs-dvt">or</span>
+                <div class="lfs-dvl"></div>
+            </div>
+
+            <button class="lfs-lbtn lfs-lbtn-a" (click)="loginType = 'Admin'">
+                <div class="lfs-bicon">🛡️</div>
+                <div class="lfs-btxt">
+                    <span class="lfs-bt">Admin Login</span>
+                    <span class="lfs-bd">Manage and view responses</span>
+                </div>
+                <span class="lfs-barr">→</span>
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="loginType" class="lfs-card-wrap">
+        <div class="lfs-card-3d">
+            <div class="lfs-corner lfs-c-tl"></div>
+            <div class="lfs-corner lfs-c-tr"></div>
+            <div class="lfs-corner lfs-c-bl"></div>
+            <div class="lfs-corner lfs-c-br"></div>
+
+            <button class="lfs-back-btn" (click)="loginType = null">← Back</button>
+            <h3 class="lfs-form-title">{{ loginType }} Login</h3>
+
+            <form (ngSubmit)="login()">
+                <div class="lfs-field">
+                    <label class="lfs-label" *ngIf="loginType === 'Student'">Email</label>
+                    <label class="lfs-label" *ngIf="loginType === 'Admin'">Username</label>
+                    <input type="text" [(ngModel)]="username" name="username" class="lfs-input"
+                        [placeholder]="loginType === 'Student' ? 'Enter your email' : 'Enter your username'" required />
+                </div>
+                <div class="lfs-field">
+                    <label class="lfs-label">Password</label>
+                    <input type="password" [(ngModel)]="password" name="password" class="lfs-input"
+                        placeholder="Enter your password" required />
+                </div>
+                <button type="submit" [disabled]="username == '' || password == ''" class="lfs-submit-btn">
+                    Login
+                </button>
+                <a *ngIf="loginType === 'Student'" href="/sign-up" class="lfs-create-link">
+                    Don't have an account? Create one →
+                </a>
+            </form>
+            <div class="lfs-form-footer">© {{ currentYear }} Student Feedback System</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="lfs-footer-bar">
+    <div class="lfs-fbadges">
+        <div class="lfs-badge"><span class="lfs-bdot lfs-bdg"></span>System Online</div>
+        <div class="lfs-badge"><span class="lfs-bdot lfs-bdb"></span>256-bit Encrypted</div>
+        <div class="lfs-badge"><span class="lfs-bdot lfs-bdp"></span>GDPR Compliant</div>
+    </div>
+</div>

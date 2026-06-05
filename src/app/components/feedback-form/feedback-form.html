@@ -1,0 +1,148 @@
+<canvas id="fb-stars"></canvas>
+<div class="fb-halo fb-h1"></div>
+<div class="fb-halo fb-h2"></div>
+<div class="fb-grid"></div>
+<div class="fb-particles" id="fb-ptcls"></div>
+
+<!-- Navbar -->
+<div class="fb-navbar">
+    <div class="fb-brand">🎓 Student Portal</div>
+    <div class="fb-nav-links">
+        <a class="fb-nav-link" routerLink="/profile">👤 View Profile</a>
+        <a class="fb-nav-link" href="#" (click)="logout()">🚪 Logout</a>
+    </div>
+</div>
+
+<!-- Form -->
+<div *ngIf="!isSubmitted" class="fb-main">
+    <div class="fb-card">
+        <div class="fb-corner fb-c-tl"></div>
+        <div class="fb-corner fb-c-tr"></div>
+        <div class="fb-corner fb-c-bl"></div>
+        <div class="fb-corner fb-c-br"></div>
+
+        <h3 class="fb-card-title">📋 Student Feedback Form</h3>
+
+        <form (ngSubmit)="submitFeedback()" #feedbackForm="ngForm">
+
+            <!-- Course + Teacher -->
+            <div class="fb-row2">
+                <div class="fb-field">
+                    <label class="fb-label">Select Course</label>
+                    <select class="fb-sel" required [(ngModel)]="feedback.courseName" name="courseName">
+                        <option value="">-- Select Course --</option>
+                        <option *ngFor="let course of courseList" [value]="course">{{ course }}</option>
+                    </select>
+                </div>
+                <div class="fb-field">
+                    <label class="fb-label">Select Teacher</label>
+                    <select class="fb-sel" required [(ngModel)]="feedback.teacherName" name="teacherName">
+                        <option value="">-- Select Teacher --</option>
+                        <option *ngFor="let teacher of teacherList" [value]="teacher">{{ teacher }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Course Section -->
+            <div class="fb-divider">
+                <div class="fb-dvl"></div><span class="fb-dvt">Course</span>
+                <div class="fb-dvl"></div>
+            </div>
+            <div class="fb-row2">
+                <div class="fb-field">
+                    <label class="fb-label">Course Rating</label>
+                    <div class="fb-stars">
+                        <span *ngFor="let i of [1,2,3,4,5]" class="fb-star"
+                            [class.fb-star-on]="i <= (+feedback.courseRating)"
+                            (click)="feedback.courseRating = i.toString()" (mouseover)="hoverRating('course', i)"
+                            (mouseout)="hoverRating('course', 0)">★</span>
+                    </div>
+                </div>
+                <div class="fb-field">
+                    <label class="fb-label">Course Comment</label>
+                    <textarea class="fb-ta" rows="2" [(ngModel)]="feedback.courseComment" name="courseComment"
+                        placeholder="Your thoughts..."></textarea>
+                </div>
+            </div>
+
+            <!-- Teacher Section -->
+            <div class="fb-divider">
+                <div class="fb-dvl"></div><span class="fb-dvt">Teacher</span>
+                <div class="fb-dvl"></div>
+            </div>
+            <div class="fb-row2">
+                <div class="fb-field">
+                    <label class="fb-label">Teacher Rating</label>
+                    <div class="fb-stars">
+                        <span *ngFor="let i of [1,2,3,4,5]" class="fb-star"
+                            [class.fb-star-on]="i <= (+feedback.teacherRating)"
+                            (click)="feedback.teacherRating = i.toString()" (mouseover)="hoverRating('teacher', i)"
+                            (mouseout)="hoverRating('teacher', 0)">★</span>
+                    </div>
+                </div>
+                <div class="fb-field">
+                    <label class="fb-label">Teacher Comment</label>
+                    <textarea class="fb-ta" rows="2" [(ngModel)]="feedback.teacherComment" name="teacherComment"
+                        placeholder="Your thoughts..."></textarea>
+                </div>
+            </div>
+
+            <!-- Facilities Section -->
+            <div class="fb-divider">
+                <div class="fb-dvl"></div><span class="fb-dvt">Facilities</span>
+                <div class="fb-dvl"></div>
+            </div>
+            <div class="fb-row2">
+                <div class="fb-field">
+                    <label class="fb-label">Class Rating</label>
+                    <div class="fb-stars">
+                        <span *ngFor="let i of [1,2,3,4,5]" class="fb-star"
+                            [class.fb-star-on]="i <= (+feedback.classRoomRating)"
+                            (click)="feedback.classRoomRating = i.toString()" (mouseover)="hoverRating('class', i)"
+                            (mouseout)="hoverRating('class', 0)">★</span>
+                    </div>
+                </div>
+                <div class="fb-field">
+                    <label class="fb-label">Other Facility Rating</label>
+                    <div class="fb-stars">
+                        <span *ngFor="let i of [1,2,3,4,5]" class="fb-star"
+                            [class.fb-star-on]="i <= (+feedback.otherRating)"
+                            (click)="feedback.otherRating = i.toString()" (mouseover)="hoverRating('other', i)"
+                            (mouseout)="hoverRating('other', 0)">★</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fb-row2">
+                <div class="fb-field">
+                    <label class="fb-label">Class Comment</label>
+                    <textarea class="fb-ta" rows="2" [(ngModel)]="feedback.classRoomComment" name="classRoomComment"
+                        placeholder="Your thoughts..."></textarea>
+                </div>
+                <div class="fb-field">
+                    <label class="fb-label">Other Suggestions</label>
+                    <textarea class="fb-ta" rows="2" [(ngModel)]="feedback.otherComment" name="otherComment"
+                        placeholder="Any suggestions..."></textarea>
+                </div>
+            </div>
+
+            <button type="submit" [disabled]="!feedbackForm.form.valid" class="fb-submit-btn">
+                Submit Feedback
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Success Screen -->
+<div *ngIf="isSubmitted" class="fb-main">
+    <div class="fb-card fb-success-card">
+        <div class="fb-corner fb-c-tl"></div>
+        <div class="fb-corner fb-c-tr"></div>
+        <div class="fb-corner fb-c-bl"></div>
+        <div class="fb-corner fb-c-br"></div>
+        <div class="fb-success-icon">✅</div>
+        <h3 class="fb-card-title">Feedback Submitted!</h3>
+        <p class="fb-success-msg">Thank you for helping us improve. We appreciate your input!</p>
+        
+    </div>
+</div>

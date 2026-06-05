@@ -1,0 +1,96 @@
+<canvas id="sup-stars"></canvas>
+<div class="sup-halo sup-h1"></div>
+<div class="sup-halo sup-h2"></div>
+<div class="sup-halo sup-h3"></div>
+<div class="sup-grid"></div>
+<div class="sup-particles" id="sup-ptcls"></div>
+
+<div class="sup-header">
+    <div class="sup-logo">🎓</div>
+    <div class="sup-title">Student Feedback System</div>
+    <div class="sup-sub">Next-Gen Academic Intelligence Platform</div>
+    <div class="sup-stats">
+        <div class="sup-stat"><span class="sup-sn">1240+</span><span class="sup-sl">Students</span></div>
+        <div class="sup-divl"></div>
+        <div class="sup-stat"><span class="sup-sn">48</span><span class="sup-sl">Courses</span></div>
+        <div class="sup-divl"></div>
+        <div class="sup-stat"><span class="sup-sn">3860+</span><span class="sup-sl">Feedbacks</span></div>
+    </div>
+</div>
+
+<div class="sup-main">
+
+    <!-- Sign Up Form -->
+    <div *ngIf="!isSubmitted" class="sup-card-wrap">
+        <div class="sup-card">
+            <div class="sup-corner sup-c-tl"></div>
+            <div class="sup-corner sup-c-tr"></div>
+            <div class="sup-corner sup-c-bl"></div>
+            <div class="sup-corner sup-c-br"></div>
+
+            <h3 class="sup-form-title">Create Account</h3>
+
+            <form #signupForm="ngForm" (ngSubmit)="onSubmit()">
+                <div class="sup-field">
+                    <label class="sup-label">Full Name</label>
+                    <input type="text" id="name" name="name" class="sup-input" [(ngModel)]="user.name"
+                        placeholder="Enter your full name" required #nameRef="ngModel" />
+                    <div *ngIf="nameRef.invalid && nameRef.touched" class="sup-error">
+                        Name is required
+                    </div>
+                </div>
+
+                <div class="sup-field">
+                    <label class="sup-label">Email</label>
+                    <input type="email" id="email" name="email" class="sup-input" [(ngModel)]="user.email"
+                        placeholder="Enter your email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        #emailRef="ngModel" />
+                    <div *ngIf="emailRef.touched && emailRef.errors" class="sup-error">
+                        <span *ngIf="emailRef.errors['required']">Email is required</span>
+                        <span *ngIf="emailRef.errors['pattern']">Enter a valid email</span>
+                    </div>
+                    <div *ngIf="errorMessage" class="sup-error-box">{{ errorMessage }}</div>
+                </div>
+
+                <div class="sup-field">
+                    <label class="sup-label">Password</label>
+                    <input type="password" id="password" name="password" class="sup-input" [(ngModel)]="user.password"
+                        placeholder="Min. 6 characters" required pattern=".{6,}" #passwordRef="ngModel" />
+                    <div *ngIf="passwordRef.touched && passwordRef.errors" class="sup-error">
+                        <span *ngIf="passwordRef.errors['required']">Password is required</span>
+                        <span *ngIf="passwordRef.errors['pattern']">At least 6 characters required</span>
+                    </div>
+                </div>
+
+                <button type="submit" [disabled]="signupForm.invalid" class="sup-submit-btn">
+                    Sign Up
+                </button>
+
+                <a href="/" class="sup-login-link">Already have an account? Login →</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Screen -->
+    <div *ngIf="isSubmitted" class="sup-card-wrap">
+        <div class="sup-card sup-success-card">
+            <div class="sup-corner sup-c-tl"></div>
+            <div class="sup-corner sup-c-tr"></div>
+            <div class="sup-corner sup-c-bl"></div>
+            <div class="sup-corner sup-c-br"></div>
+            <div class="sup-success-icon">✅</div>
+            <h3 class="sup-form-title">User Registered!</h3>
+            <p class="sup-success-msg">Welcome aboard! Your account has been created successfully.</p>
+            <button class="sup-submit-btn" (click)="login()">Go to Login</button>
+        </div>
+    </div>
+
+</div>
+
+<div class="sup-footer-bar">
+    <div class="sup-badges">
+        <div class="sup-badge"><span class="sup-bdot sup-bdg"></span>System Online</div>
+        <div class="sup-badge"><span class="sup-bdot sup-bdb"></span>256-bit Encrypted</div>
+        <div class="sup-badge"><span class="sup-bdot sup-bdp"></span>GDPR Compliant</div>
+    </div>
+</div>

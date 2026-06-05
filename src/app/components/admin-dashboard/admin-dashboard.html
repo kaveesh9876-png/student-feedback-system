@@ -1,0 +1,91 @@
+<canvas id="ad-stars"></canvas>
+<div class="ad-halo ad-h1"></div>
+<div class="ad-halo ad-h2"></div>
+<div class="ad-grid"></div>
+
+<div class="ad-navbar">
+    <div class="ad-brand">🛡️ Admin Panel</div>
+    <div class="ad-sys-sub">Student Feedback System</div>
+    <button class="ad-logout-btn" (click)="logout()">🚪 Logout</button>
+</div>
+
+<div class="ad-main">
+
+    <div class="ad-stats-row">
+        <div class="ad-stat-card">
+            <span class="ad-stat-num">{{ feedbackList.length }}</span>
+            <span class="ad-stat-lbl">Total Feedbacks</span>
+        </div>
+        <div class="ad-stat-card">
+            <span class="ad-stat-num">{{ getAvg('courseRating') }}</span>
+            <span class="ad-stat-lbl">Avg Course Rating</span>
+        </div>
+        <div class="ad-stat-card">
+            <span class="ad-stat-num">{{ getAvg('teacherRating') }}</span>
+            <span class="ad-stat-lbl">Avg Teacher Rating</span>
+        </div>
+        <!-- ✅ FIXED: classroomRating → classRating -->
+        <div class="ad-stat-card">
+            <span class="ad-stat-num">{{ getAvg('classRating') }}</span>
+            <span class="ad-stat-lbl">Avg Class Rating</span>
+        </div>
+    </div>
+
+    <div class="ad-card">
+        <div class="ad-corner ad-c-tl"></div>
+        <div class="ad-corner ad-c-tr"></div>
+        <div class="ad-corner ad-c-bl"></div>
+        <div class="ad-corner ad-c-br"></div>
+
+        <h3 class="ad-card-title">📊 Feedback Overview</h3>
+
+        <div *ngIf="isLoading" class="ad-loading">Loading feedbacks...</div>
+        <div *ngIf="errorMessage" class="ad-error">{{ errorMessage }}</div>
+
+        <div *ngIf="!isLoading" class="ad-table-wrap">
+            <table class="ad-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Course</th>
+                        <th>Teacher</th>
+                        <th>⭐ Course</th>
+                        <th>⭐ Teacher</th>
+                        <th>⭐ Class</th>
+                        <th>Course Comment</th>
+                        <th>Teacher Comment</th>
+                        <th>Class Comment</th>
+                        <th>Other</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let fb of feedbackList; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td><strong>{{ fb.courseName }}</strong></td>
+                        <td>{{ fb.teacherName }}</td>
+                        <td><span class="ad-badge ad-badge-green">{{ fb.courseRating }}</span></td>
+                        <td><span class="ad-badge ad-badge-blue">{{ fb.teacherRating }}</span></td>
+                        <!-- ✅ FIXED: classroomRating → classRating -->
+                        <td><span class="ad-badge ad-badge-purple">{{ fb.classRating }}</span></td>
+                        <td class="ad-comment">{{ fb.courseComment }}</td>
+                        <td class="ad-comment">{{ fb.teacherComment }}</td>
+                        <!-- ✅ FIXED: classroomComment → classComment -->
+                        <td class="ad-comment">{{ fb.classComment }}</td>
+                        <td class="ad-comment">{{ fb.otherFeedback }}</td>
+                        <td>
+                            <button class="ad-del-btn" (click)="deleteFeedback(fb.id)">🗑️</button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="feedbackList.length === 0">
+                        <td colspan="11" class="ad-empty">No feedback submitted yet.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="ad-footer">
+    © {{ currentYear }} Student Feedback System | Admin Panel
+</div>
