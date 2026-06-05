@@ -9,12 +9,12 @@
 
 ## 📸 Screenshots
 
-![Landing Page](preview.webp)
-![Student Login](preview__1_.webp)
-![Admin Login](preview__2_.webp)
-![Feedback Form](preview__3_.webp)
-![Student Profile](preview__4_.webp)
-![Admin Panel](Screenshot_2026-06-04_174139.png)
+![Landing Page](1-landing.png.png)
+![Student Login](2-student-login.png.webp)
+![Admin Login](3-admin-login.png.webp)
+![Feedback Form](4-feedback-form.png.webp)
+![Student Profile](5-student-profile.png.webp)
+![Admin Panel](6-admin-panel.png.webp)
 
 ## ✨ Features
 - Role-based access control: Student / Faculty / Admin
